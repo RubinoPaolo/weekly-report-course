@@ -42,6 +42,10 @@ else:
     cache.write_text(json.dumps(sorted(baseline)))
 
 now, output = failing_tests(root)
+if "No module named pytest" in output:
+    # without pytest every test run looks clean: say so instead of passing silently
+    print(json.dumps({"systemMessage": "Stop hook: the tests could not run because pytest is not installed. Run: pip install -e ."}))
+    sys.exit(0)
 new = sorted(now - baseline)
 old = sorted(now & baseline)
 
