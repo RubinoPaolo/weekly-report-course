@@ -1,0 +1,9 @@
+__pycache__/
+.pytest_cache/
+out/
+.claude/state/
+*.egg-info/
+__pycache__/
+.claude/state/
+out/
+.trace/

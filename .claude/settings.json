@@ -1,0 +1,56 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pytest:*)",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$(command -v python || command -v python3)\" \"$CLAUDE_PROJECT_DIR/.claude/hooks/session_start.py\"",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$(command -v python || command -v python3)\" \"$CLAUDE_PROJECT_DIR/.claude/hooks/trace.py\""
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$(command -v python || command -v python3)\" \"$CLAUDE_PROJECT_DIR/.claude/hooks/stop_tests.py\"",
+            "timeout": 180
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$(command -v python || command -v python3)\" \"$CLAUDE_PROJECT_DIR/.claude/hooks/trace.py\""
+          }
+        ]
+      }
+    ]
+  }
+}
