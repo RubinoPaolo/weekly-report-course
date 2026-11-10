@@ -65,5 +65,9 @@ if new:
     sys.exit(0)
 
 if old:
-    print(json.dumps({"systemMessage": "Stop hook: no new test failures. Already failing before this session: " + ", ".join(old)}))
+    # say it once per session, calmly: it is information, not an error
+    shown = state / f"told_{sid}.txt"
+    if not shown.exists():
+        shown.write_text("1")
+        print(json.dumps({"systemMessage": "Test check: all good. " + str(len(old)) + " test was already failing before you started; it is not your task unless you are asked (" + ", ".join(old) + ")."}))
 sys.exit(0)

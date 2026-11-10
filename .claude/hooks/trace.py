@@ -12,7 +12,8 @@ log.parent.mkdir(exist_ok=True)
 now = datetime.datetime.now().strftime("%H:%M:%S")
 
 if d.get("hook_event_name") == "SessionStart":
-    with open(log, "a", encoding="utf-8") as f:
+    # a new session starts a new file: you only see what this session did
+    with open(log, "w", encoding="utf-8") as f:
         f.write(f"\n## Session started {datetime.datetime.now():%Y-%m-%d %H:%M}\n\n| Time | Step | What exactly |\n|---|---|---|\n")
     sys.exit(0)
 
