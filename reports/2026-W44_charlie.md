@@ -4,7 +4,7 @@
 - **Week**: 2026-W44
 - **Author**: Simone Graf
 - **Status**: green
-- **Budget**: 0.7 M of 1.5 M
+- **Budget**: 1.41 M of 1.5 M
 - **Next milestone**: Pilot start
 - **Milestone date**: 2026-12-01
-- **Notes**: 
+- **Notes**: Robot hardware delivered early and invoiced. Pilot on track.
