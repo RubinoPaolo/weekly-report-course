@@ -27,7 +27,13 @@ def failing_tests(cwd):
     return ids, text
 
 base_file = state / f"base_{sid}.txt"
-base = base_file.read_text().strip() if base_file.exists() else git("rev-parse", "HEAD")
+head = git("rev-parse", "HEAD")
+base = base_file.read_text().strip() if base_file.exists() else head
+# Switched to another line of history during the session (git switch/checkout to an older commit,
+# another branch): compare with where the user moved to, not with where the session began.
+if subprocess.run(["git", "merge-base", "--is-ancestor", base, head], cwd=root).returncode != 0:
+    base = head
+    base_file.write_text(base)
 
 cache = state / f"baseline_{base}.json"
 if cache.exists():
